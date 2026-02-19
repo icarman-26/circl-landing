@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circl — Do stuff you love, with people</title>
+    <meta name="description" content="Circl matches you into small groups for activities you already enjoy. No planning, no coordinating. Just show up.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple: #5B6ABF;
+            --purple-deep: #4A57A0;
+            --purple-light: #E8EAF6;
+            --cream: #FAFAF8;
+            --warm-white: #FFFFFE;
+            --text-primary: #1A1A2E;
+            --text-secondary: #4A4A5A;
+            --text-muted: #8888A0;
+            --accent-warm: #E8A87C;
+            --accent-sage: #85B09A;
+            --border: #E8E8EC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 250, 248, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            color: var(--purple);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-cta {
+            background: var(--purple);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--purple-deep);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(91, 106, 191, 0.3);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(91, 106, 191, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 10%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(232, 168, 124, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--purple-light);
+            color: var(--purple);
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .badge .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--purple);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+
+        h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        h1 em {
+            color: var(--purple);
+            font-style: italic;
+        }
+
+        .hero-sub {
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 0.6s;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--purple);
+            color: white;
+            padding: 1rem 2.25rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        .hero-cta:hover {
+            background: var(--purple-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(91, 106, 191, 0.35);
+        }
+
+        .hero-cta svg {
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(3px);
+        }
+
+        .hero-note {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 1s;
+        }
+
+        /* ACTIVITIES STRIP */
+        .activities-strip {
+            padding: 3rem 0;
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--warm-white);
+        }
+
+        .scroll-track {
+            display: flex;
+            gap: 1rem;
+            animation: scroll 25s linear infinite;
+            width: max-content;
+        }
+
+        .activity-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            white-space: nowrap;
+            color: var(--text-secondary);
+            background: var(--cream);
+            border: 1px solid var(--border);
+        }
+
+        .activity-pill span {
+            font-size: 1.2rem;
+        }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            padding: 7rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--purple);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 4rem;
+            line-height: 1.15;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .step {
+            position: relative;
+        }
+
+        .step-number {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3.5rem;
+            color: var(--purple-light);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* WHAT MAKES IT DIFFERENT */
+        .different {
+            background: var(--text-primary);
+            color: var(--cream);
+            padding: 7rem 2rem;
+        }
+
+        .different-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .different .section-label {
+            color: var(--accent-warm);
+        }
+
+        .different h2 {
+            color: var(--cream);
+            margin-bottom: 3.5rem;
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .diff-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .diff-card .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .diff-card:nth-child(1) .icon { background: rgba(91, 106, 191, 0.2); }
+        .diff-card:nth-child(2) .icon { background: rgba(133, 176, 154, 0.2); }
+        .diff-card:nth-child(3) .icon { background: rgba(232, 168, 124, 0.2); }
+        .diff-card:nth-child(4) .icon { background: rgba(91, 106, 191, 0.2); }
+
+        .diff-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--cream);
+        }
+
+        .diff-card p {
+            color: rgba(250, 250, 248, 0.65);
+            line-height: 1.7;
+            font-size: 0.92rem;
+        }
+
+        /* FINAL CTA */
+        .final-cta {
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(91, 106, 191, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .final-cta h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .final-cta p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 480px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--purple);
+            text-decoration: none;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* SCROLL REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.25rem;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 3rem;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .diff-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .how-it-works,
+            .different {
+                padding: 5rem 1.5rem;
+            }
+
+            .final-cta {
+                padding: 5rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo">circl</div>
+        <a href="https://circl-app.vercel.app" class="nav-cta">Join free</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="badge">
+            <span class="dot"></span>
+            Launching in DC — March 2025
+        </div>
+        <h1>Do stuff you love,<br><em>with people</em></h1>
+        <p class="hero-sub">
+            Circl matches you into small groups for activities you already enjoy. No planning, no coordinating. You just show up.
+        </p>
+        <a href="https://circl-app.vercel.app" class="hero-cta">
+            Become a founding member
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <p class="hero-note">Free during the pilot. No catch.</p>
+    </section>
+
+    <!-- ACTIVITIES STRIP -->
+    <div class="activities-strip">
+        <div class="scroll-track">
+            <div class="activity-pill"><span>🎱</span> Pool</div>
+            <div class="activity-pill"><span>☕</span> Coffee</div>
+            <div class="activity-pill"><span>🎳</span> Bowling</div>
+            <div class="activity-pill"><span>🏛️</span> Museums</div>
+            <div class="activity-pill"><span>🍺</span> Bars</div>
+            <div class="activity-pill"><span>🌳</span> Parks</div>
+            <div class="activity-pill"><span>🎨</span> Art galleries</div>
+            <div class="activity-pill"><span>🎤</span> Karaoke</div>
+            <div class="activity-pill"><span>🧗</span> Rock climbing</div>
+            <div class="activity-pill"><span>📚</span> Book clubs</div>
+            <!-- duplicate for seamless loop -->
+            <div class="activity-pill"><span>🎱</span> Pool</div>
+            <div class="activity-pill"><span>☕</span> Coffee</div>
+            <div class="activity-pill"><span>🎳</span> Bowling</div>
+            <div class="activity-pill"><span>🏛️</span> Museums</div>
+            <div class="activity-pill"><span>🍺</span> Bars</div>
+            <div class="activity-pill"><span>🌳</span> Parks</div>
+            <div class="activity-pill"><span>🎨</span> Art galleries</div>
+            <div class="activity-pill"><span>🎤</span> Karaoke</div>
+            <div class="activity-pill"><span>🧗</span> Rock climbing</div>
+            <div class="activity-pill"><span>📚</span> Book clubs</div>
+        </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+        <div class="reveal">
+            <p class="section-label">How it works</p>
+            <h2>Three steps. Zero effort.</h2>
+        </div>
+        <div class="steps">
+            <div class="step reveal">
+                <div class="step-number">01</div>
+                <h3>Pick what you like</h3>
+                <p>Choose the activities you actually enjoy — pool, coffee, museums, whatever. Set the days you're free.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">02</div>
+                <h3>Get matched</h3>
+                <p>Circl puts together a small group (4–5 people) who want to do the same thing, same day. Time and place are handled.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">03</div>
+                <h3>Just show up</h3>
+                <p>Do the thing you already wanted to do. After, tell us privately who you'd hang out with again. That's it.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT MAKES IT DIFFERENT -->
+    <section class="different">
+        <div class="different-inner">
+            <div class="reveal">
+                <p class="section-label">Why Circl</p>
+                <h2>Built for continuity,<br>not one-offs</h2>
+            </div>
+            <div class="diff-grid">
+                <div class="diff-card reveal">
+                    <div class="icon">🔁</div>
+                    <h3>Familiar faces compound</h3>
+                    <p>Keep showing up for stuff you like, and the people you clicked with start showing up too. No awkward number exchanges needed.</p>
+                </div>
+                <div class="diff-card reveal">
+                    <div class="icon">🤫</div>
+                    <h3>Totally private signals</h3>
+                    <p>After each hangout, you privately tell us who you'd want to see again. Nobody sees who picked who. Nobody gets rejected.</p>
+                </div>
+                <div class="diff-card reveal">
+                    <div class="icon">🎯</div>
+                    <h3>Activity-first, always</h3>
+                    <p>You're not "meeting strangers." You're playing pool on a Wednesday. The people are the bonus, not the premise.</p>
+                </div>
+                <div class="diff-card reveal">
+                    <div class="icon">⚡</div>
+                    <h3>Zero logistics</h3>
+                    <p>No group chats, no polls, no "does Thursday work?" Circl handles who, where, and when. You just walk in.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <div class="reveal">
+            <p class="section-label">Washington, DC</p>
+            <h2>The pilot starts in March</h2>
+            <p>We're looking for founding members in DC. Join free, pick your activities, and be part of the first wave.</p>
+            <a href="https://circl-app.vercel.app" class="hero-cta">
+                Join Circl — it's free
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <p class="hero-note">No subscriptions, no gimmicks. Just show up.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 Circl · <a href="mailto:circl.hangouts@gmail.com">Contact</a></p>
+    </footer>
+
+    <!-- SCROLL REVEAL -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
