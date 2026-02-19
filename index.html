@@ -340,14 +340,26 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
             margin-bottom: 1.25rem;
         }
 
+        .diff-card .icon svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 1.8;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         .diff-card:nth-child(1) .icon { background: rgba(91, 106, 191, 0.2); }
+        .diff-card:nth-child(1) .icon svg { stroke: #8B9AE0; }
         .diff-card:nth-child(2) .icon { background: rgba(133, 176, 154, 0.2); }
+        .diff-card:nth-child(2) .icon svg { stroke: #85B09A; }
         .diff-card:nth-child(3) .icon { background: rgba(232, 168, 124, 0.2); }
+        .diff-card:nth-child(3) .icon svg { stroke: #E8A87C; }
         .diff-card:nth-child(4) .icon { background: rgba(91, 106, 191, 0.2); }
+        .diff-card:nth-child(4) .icon svg { stroke: #8B9AE0; }
 
         .diff-card h3 {
             font-size: 1.1rem;
@@ -503,29 +515,29 @@
     <!-- ACTIVITIES STRIP -->
     <div class="activities-strip">
         <div class="scroll-track">
-            <div class="activity-pill"><span>☕</span> Coffee</div>
-            <div class="activity-pill"><span>🌳</span> Park walks</div>
-            <div class="activity-pill"><span>🏛️</span> Museums & galleries</div>
+            <div class="activity-pill"><span>☕</span>Coffee</div>
+            <div class="activity-pill"><span>🌳</span> Park Walks</div>
+            <div class="activity-pill"><span>🏛️</span> Museums & Galleries</div>
+            <div class="activity-pill"><span>🍸</span> Drinks</div>
             <div class="activity-pill"><span>🎱</span> Pool</div>
             <div class="activity-pill"><span>🎯</span> Darts</div>
             <div class="activity-pill"><span>🥌</span> Shuffleboard</div>
             <div class="activity-pill"><span>🎳</span> Bowling</div>
-            <div class="activity-pill"><span>🍺</span> Drinks</div>
-            <div class="activity-pill"><span>🍻</span> Breweries</div>
             <div class="activity-pill"><span>🧠</span> Trivia</div>
-            <div class="activity-pill"><span>🍜</span> Food halls</div>
+            <div class="activity-pill"><span>🍻</span> Breweries</div>
+            <div class="activity-pill"><span>🍜</span> Food Halls</div>
             <!-- duplicate for seamless loop -->
-            <div class="activity-pill"><span>☕</span> Coffee</div>
-            <div class="activity-pill"><span>🌳</span> Park walks</div>
-            <div class="activity-pill"><span>🏛️</span> Museums & galleries</div>
+            <div class="activity-pill"><span>☕</span>Coffee</div>
+            <div class="activity-pill"><span>🌳</span> Park Walks</div>
+            <div class="activity-pill"><span>🏛️</span> Museums & Galleries</div>
+            <div class="activity-pill"><span>🍸</span> Drinks</div>
             <div class="activity-pill"><span>🎱</span> Pool</div>
             <div class="activity-pill"><span>🎯</span> Darts</div>
             <div class="activity-pill"><span>🥌</span> Shuffleboard</div>
             <div class="activity-pill"><span>🎳</span> Bowling</div>
-            <div class="activity-pill"><span>🍺</span> Drinks</div>
-            <div class="activity-pill"><span>🍻</span> Breweries</div>
             <div class="activity-pill"><span>🧠</span> Trivia</div>
-            <div class="activity-pill"><span>🍜</span> Food halls</div>
+            <div class="activity-pill"><span>🍻</span> Breweries</div>
+            <div class="activity-pill"><span>🍜</span> Food Halls</div>
         </div>
     </div>
 
@@ -563,22 +575,22 @@
             </div>
             <div class="diff-grid">
                 <div class="diff-card reveal">
-                    <div class="icon">🔁</div>
+                    <div class="icon"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
                     <h3>Familiar faces compound</h3>
                     <p>Keep showing up for stuff you like, and the people you clicked with start showing up too. No awkward number exchanges needed.</p>
                 </div>
                 <div class="diff-card reveal">
-                    <div class="icon">🤫</div>
+                    <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                     <h3>Totally private signals</h3>
                     <p>After each hangout, you privately tell us who you'd want to see again. Nobody sees who picked who. Nobody gets rejected.</p>
                 </div>
                 <div class="diff-card reveal">
-                    <div class="icon">🎯</div>
+                    <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
                     <h3>Activity-first, always</h3>
                     <p>You're not "meeting strangers." You're playing pool on a Wednesday. The people are the bonus, not the premise.</p>
                 </div>
                 <div class="diff-card reveal">
-                    <div class="icon">⚡</div>
+                    <div class="icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
                     <h3>Zero logistics</h3>
                     <p>No group chats, no polls, no "does Thursday work?" Circl handles who, where, and when. You just walk in.</p>
                 </div>
